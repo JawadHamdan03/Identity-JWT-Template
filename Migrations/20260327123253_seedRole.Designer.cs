@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecAndIdentity.Data;
 
@@ -11,9 +12,11 @@ using SecAndIdentity.Data;
 namespace SecAndIdentity.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260327123253_seedRole")]
+    partial class seedRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,15 @@ namespace SecAndIdentity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            ConcurrencyStamp = "1",
+                            Id = "a1e1f0a5-9404-4742-81ab-2bb3a0c6703b",
+                            ConcurrencyStamp = "5c3ce178-a684-4c3e-95ad-e677a2976b5e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2",
-                            ConcurrencyStamp = "2",
+                            Id = "6ca0bdf3-1b9d-4bbd-b814-cef753333297",
+                            ConcurrencyStamp = "905b95b7-c1c5-4981-a64d-5f033b515d0d",
                             Name = "User",
                             NormalizedName = "USER"
                         });

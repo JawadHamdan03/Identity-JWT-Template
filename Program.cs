@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SecAndIdentity.Data;
 using SecAndIdentity.Models;
 using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -42,7 +43,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey=true,
         IssuerSigningKey=new SymmetricSecurityKey
             (
-                System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+                System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]!)
             )
 
     };
@@ -56,6 +57,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
