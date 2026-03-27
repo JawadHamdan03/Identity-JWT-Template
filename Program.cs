@@ -5,6 +5,8 @@ using SecAndIdentity.Data;
 using SecAndIdentity.Models;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
+using SecAndIdentity.Interfaces.Services;
+using SecAndIdentity.Services.Classes;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 
+
+builder.Services.AddScoped<ITokenService,TokenService>();
 builder.Services.AddIdentity<AppUser,IdentityRole>(options =>
 {
     options.Password.RequireDigit=true;
