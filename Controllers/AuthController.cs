@@ -1,14 +1,18 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SecAndIdentity.Data;
 using SecAndIdentity.DTOs.Requests;
 using SecAndIdentity.DTOs.Responses;
 using SecAndIdentity.Interfaces.Services;
 using SecAndIdentity.Models;
+using SecAndIdentity.Services.Classes;
 namespace SecAndIdentity.Controllers;
 
 [Route("/api/[controller]")]
 [ApiController]
-public class AuthController(UserManager<AppUser> userManager, ITokenService tokenService) : ControllerBase
+public class AuthController(UserManager<AppUser> userManager, ITokenService tokenService, SignInManager<AppUser> signInManager) : ControllerBase
 {
     
     [HttpPost("register")]
@@ -59,9 +63,33 @@ public class AuthController(UserManager<AppUser> userManager, ITokenService toke
 
 
     [HttpPost("login")]
-    public IActionResult Login()
+    [Authorize]
+    public async Task<IActionResult> Login(LoginRequest request )
     {
-        return Ok();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
+
+        var user = await userManager.Users.FirstOrDefaultAsync(u=> u.Email!.Equals(request.Email));
+        
+        if (user is null)
+            return Unauthorized("Invalid Email");
+        
+        
+        var signInResult=await signInManager.CheckPasswordSignInAsync(user,request.Password!,false);
+
+        if (signInResult.Succeeded)
+        {
+            var token=tokenService.CreateToken(user);
+            return Ok(new LoginResponse
+            {
+                Email=user.Email,
+                UserName=user.UserName,
+                Token=token
+            });
+        }
+        
+        return Unauthorized("Email or Password is not correct");
     }
 
 
