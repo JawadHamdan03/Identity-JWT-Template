@@ -3233,11 +3233,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamda\\Desktop\\SecAndIdentity\\SecAndIdentity.csproj",
+      "projectUniqueName": "C:\\Users\\hamda\\Projects\\Identity-JWT-Template\\SecAndIdentity.csproj",
       "projectName": "SecAndIdentity",
-      "projectPath": "C:\\Users\\hamda\\Desktop\\SecAndIdentity\\SecAndIdentity.csproj",
+      "projectPath": "C:\\Users\\hamda\\Projects\\Identity-JWT-Template\\SecAndIdentity.csproj",
       "packagesPath": "C:\\Users\\hamda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamda\\Desktop\\SecAndIdentity\\obj\\",
+      "outputPath": "C:\\Users\\hamda\\Projects\\Identity-JWT-Template\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

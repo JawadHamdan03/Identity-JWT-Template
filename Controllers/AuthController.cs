@@ -35,7 +35,7 @@ public class AuthController(UserManager<AppUser> userManager, ITokenService toke
                 var roleResult = await userManager.AddToRoleAsync(appUser,"User");
                 if (roleResult.Succeeded)
                 {
-                    string token=tokenService.CreateToken(appUser);
+                    string token=await tokenService.CreateToken(appUser);
                     var res = new RegisterResponse
                     {
                       UserName=appUser.UserName,
@@ -63,7 +63,6 @@ public class AuthController(UserManager<AppUser> userManager, ITokenService toke
 
 
     [HttpPost("login")]
-    [Authorize]
     public async Task<IActionResult> Login(LoginRequest request )
     {
         if (!ModelState.IsValid)
@@ -85,7 +84,7 @@ public class AuthController(UserManager<AppUser> userManager, ITokenService toke
             {
                 Email=user.Email,
                 UserName=user.UserName,
-                Token=token
+                Token=token.Result
             });
         }
         

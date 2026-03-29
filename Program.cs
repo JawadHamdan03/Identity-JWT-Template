@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using SecAndIdentity.Interfaces.Services;
 using SecAndIdentity.Services.Classes;
+using Microsoft.AspNetCore.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -71,6 +72,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+app.MapGet("/checkAuth",[Authorize(Roles ="User")] () =>
+{
+    return Results.Ok("all good");
+});
 
 app.Run();
 

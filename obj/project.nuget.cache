@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K+vME1OA1BI=",
+  "dgSpecHash": "5BshC4oC9oE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hamda\\Desktop\\SecAndIdentity\\SecAndIdentity.csproj",
+  "projectFilePath": "C:\\Users\\hamda\\Projects\\Identity-JWT-Template\\SecAndIdentity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hamda\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\hamda\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
