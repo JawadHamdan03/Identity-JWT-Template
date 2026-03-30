@@ -13,7 +13,7 @@ namespace SecAndIdentity.Controllers;
 public class TokenController(ITokenService tokenService,UserManager<AppUser> userManager,SignInManager<AppUser> signInManager) : ControllerBase
 {
     [HttpPost("generate")]
-    [Authorize(Roles ="User")]
+    [Authorize]
     public async Task<IActionResult> IssueToken(LoginRequest request)
     {
         

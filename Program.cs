@@ -17,7 +17,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy( policy =>
+    {
+        policy.WithOrigins("http://localhost:5000");
+    });
+});
 builder.Services.AddScoped<ITokenService,TokenService>();
 builder.Services.AddIdentity<AppUser,IdentityRole>(options =>
 {
@@ -34,7 +40,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme=
     options.DefaultChallengeScheme=
     options.DefaultScheme=
-    options.DefaultSignInScheme=
+    options.DefaultSignInScheme=JwtBearerDefaults.AuthenticationScheme;
     options.DefaultSignOutScheme=JwtBearerDefaults.AuthenticationScheme;
 
 }).AddJwtBearer(options =>
@@ -59,7 +65,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
+app.UseCors();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -74,8 +80,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.MapGet("/checkAuth",[Authorize(Roles ="User")] () =>
+app.MapGet("/checkAuth",[Authorize] (HttpContext context) =>
 {
+    System.Console.WriteLine(context.Request.Headers.Authorization.ToString());
     return Results.Ok("all good");
 });
 
